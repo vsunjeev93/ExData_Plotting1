@@ -1,0 +1,5 @@
+x<-read.table('table1.txt',header=TRUE,sep=';',check.names=FALSE)
+realx<-subset(x,(x$Date=='2/2/2007') | (x$Date=='1/2/2007'))
+y<-transform(realx,Time=paste(realx$Date,realx$Time))
+data<-transform(y,Time=as.POSIXct(y$Time,format='%d/%m/%Y %H:%M:%S'))
+with(data,hist(as.numeric(as.character(Global_active_power)),col='red',xlab='Global Active Power(kilowatts)',main='Global Active Power',ylab='Frequency'))
