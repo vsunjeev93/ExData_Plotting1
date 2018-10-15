@@ -1,0 +1,7 @@
+x<-read.table('household_power_consumption.txt',header=TRUE,sep=';',check.names=FALSE)
+realx<-subset(x,(x$Date=='2/2/2007') | (x$Date=='1/2/2007'))
+y<-transform(realx,Time=paste(realx$Date,realx$Time))
+data<-transform(y,Time=as.POSIXct(y$Time,format='%d/%m/%Y %H:%M:%S'))
+with(data,hist(as.numeric(as.character(Global_active_power)),col='red',xlab='Global Active Power(kilowatts)',main='Global Active Power',ylab='Frequency'))
+dev.copy(png,file='plot1.png')
+dev.off()
